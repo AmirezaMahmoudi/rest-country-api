@@ -1,38 +1,268 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+:root {
+  --body-font: "Nunito Sans", sans-serif;
+  --light-mode-text: hsl(200, 15%, 8%);
+  --light-mode-background: hsl(0, 0%, 98%);
+  --light-mode-input: hsl(0, 0%, 52%);
+  --white: hsl(0, 0%, 100%);
+  --dark-mode-bg: hsl(207, 26%, 17%);
+  --dark-mode-elements: hsl(209, 23%, 22%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  background-color: var(--light-mode-background);
+  color: var(--light-mode-text);
+  font-family: var(--body-font);
+  font-size: 14px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+img {
+  display: block;
+}
+a {
+  text-decoration: none;
+  color: var(--light-mode-text);
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.3rem 5.1rem;
+  -webkit-box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  background-color: var(--white);
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.2rem;
+}
+main {
   display: flex;
   flex-direction: column;
+  gap: 3rem;
+}
+.toggle-light,
+.toggle-dark {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.search-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2.8rem 5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.input-block {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 30rem;
+  align-items: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.search-icon,
+.delete-icon {
+  position: absolute;
+  opacity: 0.4;
+  font-size: 1.1rem;
+  padding-left: 2rem;
+  cursor: pointer;
+}
+.delete-icon {
+  background-color: transparent;
+  border: none;
+  right: 0;
+  padding-right: 1rem;
+}
+.input-block input {
+  padding: 1.2rem;
+  -webkit-box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  border: none;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.input-block input::placeholder {
+  opacity: 0.4;
+  font-size: 0.9rem;
+  color: var(--light-mode-text);
+  font-weight: 600;
+  font-family: var(--body-font);
+}
+
+.input-block input[type="search"] {
+  font-size: 0.9rem;
+  color: var(--light-mode-text);
+  padding-left: 5rem;
+  font-family: var(--body-font);
+}
+
+.select-region {
+  position: relative;
+  border-radius: 10px;
+  width: 11.5rem;
+  height: 30%;
+  padding: 0 0.2rem;
+  -webkit-box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  background-color: var(--white);
+}
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.select-region summary {
+  padding: 1.3rem 0.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 2.8rem;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  justify-content: space-between;
+}
+
+.select-region summary:after {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-bottom: 1px solid currentColor;
+  border-left: 1px solid currentColor;
+  border-bottom-left-radius: 2px;
+  transform: rotate(45deg) translate(50%, 0);
+  transform-origin: center center;
+  transition: all ease-in-out 0.3s;
+  color: var(--dark-mode-elements);
+}
+.active-regions.select-region summary:after {
+  transform: rotate(-45deg) translate(50%, 0);
+  transition: all ease-in-out 0.3s;
+}
+
+.region-list {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--white);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  padding: 0.2rem 1rem;
+  margin: 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  list-style: none;
+  line-height: 1.8rem;
+  -webkit-box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+  box-shadow: rgb(0 0 0 / 3%) 0px 0px 3px 3px;
+}
+
+.region-list li {
+  cursor: pointer;
+  color: var(--dark-mode-bg);
+  transition: all ease-in-out 0.3s;
+}
+
+.loader {
+  margin: 5% auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.dark {
+  background-color: var(--dark-mode-bg);
+  color: var(--white);
+}
+.dark a {
+  color: var(--white);
+}
+
+.dark nav,
+.dark .inside-container,
+.dark .input-block input,
+.dark .select-region,
+.dark .region-list,
+.dark .back-link {
+  -webkit-box-shadow: 0px 7px 6px -4px rgba(4, 4, 4, 0.27);
+  box-shadow: 0px 7px 6px -4px rgba(9, 9, 9, 0.27);
+  background-color: var(--dark-mode-elements);
+}
+
+.dark .input-block input,
+.dark .select-region,
+.dark .region-list li,
+.dark .input-block input::placeholder,
+.dark .search-icon,
+.dark .delete-icon,
+.dark .region-list,
+.dark .select-region summary:after {
+  color: var(--white);
+}
+@media (hover: hover) {
+  .region-list li:hover,
+  .dark .region-list li:hover {
+    transition: all ease-in-out 0.3s;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 1025px) {
+  .search-section {
+    flex-direction: column;
+    align-items: left;
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  nav {
+    padding: 1rem;
+  }
+  .input-block {
+    width: 20rem;
+  }
+
+  .search-section {
+    align-items: initial;
+    padding: 1.5rem;
   }
 }
