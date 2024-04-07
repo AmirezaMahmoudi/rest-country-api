@@ -1,12 +1,14 @@
 import React, { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { CountriesInterface } from "../../types.ts";
+import "./countries.css"
 
 
-function AllCountries(props) {
+function AllCountries(props: any) {
   return (
     <section className="container-block">
       {props.countries.map(
-        ({ name, population, region, capital, flags, index }) => (
+        ({ name, population, region, capital, flags, index }: CountriesInterface) => (
           <Link
             key={name}
             to={`/${name.toLowerCase().replace(/\s/g, "%20")}`}

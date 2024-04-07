@@ -1,6 +1,7 @@
-import  { useState } from "react";
+import React, { useState } from "react";
+import { CountriesInterface, RegionsInterface } from "../types.ts"
 
-const regions = [
+const regions: RegionsInterface[] = [
   {
     label: "All",
     name: "all",
@@ -29,12 +30,12 @@ const regions = [
 
 
 
-const Regions = (setCountries) => {
+const Regions = ({setCountries} : {setCountries: (value: CountriesInterface) => void}) => {
 
   const [isVisible, setVisibility] = useState(false);
   const [activeRegion, setActiveRegion] = useState("");
 
-  const fetchRegion = async (regionName) => {
+  const fetchRegion = async (regionName: string) => { 
     if (regionName === "all") {
       const url = `https://restcountries.com/v2/all`;
       const response = await fetch(url);

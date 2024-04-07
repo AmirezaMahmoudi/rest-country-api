@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import React, { Link } from "react-router-dom";
+import { CountriesInterface } from "../../types.ts";
 
-function Filtered({filtered, foundFilter}) {
+function Filtered({filtered, foundFilter}: {filtered: CountriesInterface[] | null, foundFilter: boolean}) {
   return (
     <section className="container-block">
       {foundFilter &&  filtered ? (
        filtered.map(
-          ({ name, population, region, capital, flags, index }) => (
+          ({ name, population, region, capital, flags, index }: CountriesInterface) => (
             <Link
               key={name}
               to={`/${name.toLowerCase().replace(/\s/g, "%20")}`}

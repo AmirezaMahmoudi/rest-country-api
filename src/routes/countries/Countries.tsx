@@ -1,19 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
-import Search from "../../components/Search";
-import AllCountries from "./AllCountries";
-import Filtered from "./Filtered";
-import Loading from "../../components/Loading";
-import "./countries.css";
+import React, { useState, useEffect, useCallback } from "react";
+import Search from "../../components/Search.tsx";
+import AllCountries from "./AllCountries.tsx";
+import { CountriesInterface } from "../../types.ts";
+import Filtered from "./Filtered.tsx";
+import SearchingMessage from "../../components/Loading.tsx";
 
 const Countries = () => {
   const url = `https://restcountries.com/v2/all`;
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [foundFilter, setFoundFilter] = useState(false);
-  const [filtered, setFiltered] = useState(null);
+  const [filtered, setFiltered] = useState<CountriesInterface[] | null>(null);
   const [searchInput, setSearchInput] = useState("");
 
-  const fetchCountries = useCallback(async () => {
+  const fetchCountries = useCallback(async (): Promise<void> => {
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -34,10 +34,10 @@ const Countries = () => {
       mounted = false; 
     };
   }, [fetchCountries]);
-  const searchCountries = (searchValue) => {
+  const searchCountries = (searchValue: string): void => {
     setSearchInput(searchValue);
     if (searchInput) {
-        let filter  = countries.filter((country) =>
+        let filter: CountriesInterface[] = countries.filter((country) =>
         Object.values(country)
           .join("")
           .toLowerCase()
@@ -59,13 +59,13 @@ const Countries = () => {
   };
 
 
-  const resetInput = () => {
+  const resetInput = (): void => {
     return setSearchInput("");
   }
   return (
     <main>
       {isLoading ? (
-       <Loading/>
+       <SearchingMessage/>
       ) : (
         <>
           <Search

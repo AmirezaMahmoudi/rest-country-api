@@ -1,9 +1,9 @@
 
 import './App.css';
-import { BrowserRouter ,Route, Routes } from "react-router-dom";
-import Countries from "./routes/countries/Countries";
-import Header from "./components/Header";
-import Country from "./routes/country/Country";
+import {BrowserRouter, Route, Routes } from "react-router-dom";
+import Countries from "./routes/countries/Countries.tsx";
+import Header from "./components/Header.tsx";
+import Country from "./routes/country/Country.tsx";
 function App() {
   return (
     <>

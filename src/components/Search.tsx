@@ -1,9 +1,11 @@
+import React from "react";
+import { SearchProps } from "../types";
 import { FaSearch } from "react-icons/fa";
-import Regions from "./Regions";
+import Regions from "./Regions.tsx";
 
 
 
-const Search = ( searchCountries, setCountries, searchInput, resetInput ) => {
+const Search = ({ searchCountries, setCountries, searchInput, resetInput }: SearchProps) => {
   return (
     <article className="search-section">
       <section className="input-block">
